@@ -20,12 +20,13 @@ p,
 ol,
 ul,
 input,
-textarea,{
+textarea {
 
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
+  padding:0;
 }
 
 ol,
@@ -44,6 +45,10 @@ input, select, textarea {
 }
 
 .container{
+  display: block;
+  max-width: 480px;
+  margin:0 auto;
+  padding: 1rem;
 
 }
 .main{
