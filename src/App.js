@@ -15,7 +15,7 @@ const App = () => {
     { id: 3, title: 'Pausa', checked: false},
   ]; //criando a lista de tarefas 1b (após criar, popular em use states em 1a)
 
-  const [todos, ]= useState(initialTodos) //Criando a lista de tarefas 1a
+  const [todos, setTodos ]= useState([]) //Criando a lista de tarefas 1a [initialTodos], com o progresso do código, foi trocado o array inicial, por um vazio.
   const [value, setValue]= useState('');
 
 
@@ -24,8 +24,14 @@ const App = () => {
   };
 
    // Por causa da função erase, quando digita algo no 'todo' da tarefa, ele envia e limpa o 'todo'.
-  const submit = () =>{
+  const submit = () => {
     console.log('submit', value);
+    setTodos([...todos,
+      { id: new Date().getTime(), //gera um id diferente
+        title: value, 
+        checked: false
+      }]);
+
     erase();
   };
 
@@ -58,7 +64,9 @@ const App = () => {
         onChange={onChange}
         onKeyDown={onKeyDown}
         />
-        <ul className="todo-list">
+        
+        {/* cria ul da lista de tarefas e renderiza com o map 1c */}
+        <ul className="todo-list"> 
           {todos.map((todo)=>(
             //cada elemento dentro do array, tem que ter o seu key, é o que diferencia esse elemento dos outros
            <li key={todo.id.toString()}>
