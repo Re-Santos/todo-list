@@ -51,14 +51,14 @@ const App = () => {
     }
   };
   // função que risca a tarefa concluida - ul todo 
-  //  const onToggle = (todo) =>{
-  //   console.log ('toggle', todo)
+   const onToggle = (todo) =>{
+   
     // neste caso o map esta funcionando como um filtro, uma manipulação de array (obj,recebe esse nome pq não pode ser todo para não entrar em conflito)
     // ira percorrer , mas só vai mexer no checked
-  //   todo.map((obj) =>
-  //   (obj.id === todo.id ?  {...obj, checked: true} : obj;
-  //   ));
-  //  };
+    setTodos(todos.map((obj) => (obj.id === todo.id ?  {...obj, checked: !todo.checked} : obj))
+    );
+    // console.log ('toggle', setTodos);
+   };
   
 
   return (
@@ -81,13 +81,13 @@ const App = () => {
             //cada elemento dentro do array, tem que ter o seu key, é o que diferencia esse elemento dos outros
            <li key={todo.id.toString()}>
             <span 
-            className='todo'
+            className={['todo', todo.checked ? 'checked':''].join(' ')}
             // criei uma função anônima, que invoca a função de riscar a tarefa concluida
-            onclick={()=>onToggle(todo)}
-            onKeyPress={()=> onToggle(todo)}
+            onClick={()=>onToggle(todo)}
             role="button"
             tabIndex={0}
-            >{todo.title}</span>
+            >{todo.title}
+            </span>
            <button className='remove' type='button'>
             <MdDelete size={28}/>
            </button>
