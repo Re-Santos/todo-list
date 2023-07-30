@@ -59,7 +59,11 @@ const App = () => {
     );
     // console.log ('toggle', setTodos);
    };
-  
+   const onRemove = (todo) => {
+    console.log('remove,todo');
+    // filtra só a execessão, todo que são diferentes do id
+    setTodos(todos.filter((obj) => obj.id !== todo.id));
+   };
 
   return (
 
@@ -88,7 +92,11 @@ const App = () => {
             tabIndex={0}
             >{todo.title}
             </span>
-           <button className='remove' type='button'>
+           <button 
+           className='remove' 
+           type='button'
+            onClick={()=> onRemove(todo)}
+            >
             <MdDelete size={28}/>
            </button>
            </li>
