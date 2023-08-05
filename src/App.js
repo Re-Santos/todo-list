@@ -2,12 +2,10 @@ import React from 'react';
 import './App.css';
 import { useState } from 'react';
 import {MdDelete} from 'react-icons/md';
-
+import NewTodo from "./components/NewTodo";
 
 const App = () => {
-  const ESCAPE_KEY = 27;
-  const ENTER_KEY = 13;
-  
+
   //Dentro do array, tem objetos, e esses objetos  tem propriedades
   const initialTodos= [
     { id: 1, title: 'Estudar JavaScript', checked: false},
@@ -16,41 +14,18 @@ const App = () => {
   ]; //criando a lista de tarefas 1b (após criar, popular em use states em 1a)
 
   const [todos, setTodos ]= useState([]) //Criando a lista de tarefas 1a [initialTodos], com o progresso do código, foi trocado o array inicial, por um vazio.
-  const [value, setValue]= useState('');
-
-
-  const erase = () =>{
-    setValue('');
-  };
-
-   // Por causa da função erase, quando digita algo no 'todo' da tarefa, ele envia e limpa o 'todo'.
-  const submit = () => {
-    console.log('submit', value);
+  // O estado value que estava aqui, foi o NewTodo, em index para antes do return
+  
+  const onNewTodo = (value) => {
     setTodos([...todos,
       { id: new Date().getTime(), //gera um id diferente
         title: value, 
         checked: false
       }]);
+  }
 
-    erase();
-  };
-
-  //event, para receber o que a pessoa digitou
-  const onChange = (event) => {
-    setValue(event.target.value)
-  };
-
-    //usando o parâmentro event, podemos receber os parâmetros do input
-  const onKeyDown = (event)=>{
-    if (event.which === ENTER_KEY){
-     submit();
-    }
-     else if (event.which === ESCAPE_KEY){
-      erase();
-     
-    }
-  };
-  // função que risca a tarefa concluida - ul todo 
+ 
+    // função que risca a tarefa concluida - ul todo 
    const onToggle = (todo) =>{
    
     // neste caso o map esta funcionando como um filtro, uma manipulação de array (obj,recebe esse nome pq não pode ser todo para não entrar em conflito)
@@ -64,7 +39,7 @@ const App = () => {
     // filtra só a execessão, todo que são diferentes do id
     setTodos(todos.filter((obj) => obj.id !== todo.id));
    };
-
+  
   return (
 
     <section id = "app" className = 'container'>
@@ -72,12 +47,9 @@ const App = () => {
         <h1 className="title">Todo</h1>
       </header>
       <section className="main">
-        <input className="new-todo"
-        placeholder='Digite sua tarefa'
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        />
+        {/* onNewTodo emite um evento que dispara uma função para qnd acontecer um novo todo */}
+        <NewTodo onNewTodo={onNewTodo}/>
+        {/* //input NewTodo que estava aqui, foi retirado e levado para index.js(componentização) */}
         
         {/* cria ul da lista de tarefas e renderiza com o map 1c */}
         <ul className="todo-list"> 
